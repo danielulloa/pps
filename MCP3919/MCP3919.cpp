@@ -1,4 +1,8 @@
 /*
+ * MCP3919 Library
+ * Daniel Ulloa
+ * 4/2022
+ *
  * MCP3903 Library
  * Kerry D. Wong
  * http://www.kerrywong.com
@@ -32,6 +36,7 @@ void MCP3919::reset()
 //OSR_256 00 = 32
 void MCP3919::reset(byte osr)
 {
+	// !TODO!
 	unsigned long cmd1 = 0xfc0fd0;
 	unsigned long cmd2 = 0x000fc0 | osr << 4;
 	byte cmdByte = 	DEVICE_ADDR | REG_CONFIG << 1;
@@ -74,7 +79,7 @@ void MCP3919::writeRegister(byte reg, unsigned long data)
 	digitalWrite(pinCS, HIGH);	
 }
 
-//read from ADC channel (0-5)
+//read from ADC channel (0-2)
 double MCP3919::readADC(byte channel)
 {
 	long r = (long) readRegister(channel);
@@ -85,7 +90,7 @@ double MCP3919::readADC(byte channel)
 }
 
 //set channel gain
-//channel (0-5)
+//channel (0-2)
 //valid gain settings:
 //GAIN_1
 //GAIN_2
@@ -102,6 +107,7 @@ void MCP3919::setGain(byte channel, byte gain)
 //the boost parameter indicates the current boost setting for channel
 void MCP3919::setGain(byte channel, byte gain, byte boost)
 {
+	// !TODO!
 	unsigned long r = readRegister(REG_GAIN);
 
 	byte idx = channel * 4;
