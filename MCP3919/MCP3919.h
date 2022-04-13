@@ -264,5 +264,6 @@ private:
     static const int pinMISO = 12; //MISO
     static const int pinSPIClock = 13; //SCK
     static const int pinCS = 10; //CS
+	static const int pinRST = 8;
 };
 #endif

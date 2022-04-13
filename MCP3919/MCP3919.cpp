@@ -18,32 +18,25 @@ MCP3919::MCP3919()
     pinMode(pinMISO, INPUT);
     pinMode(pinSPIClock, OUTPUT);
     pinMode(pinCS, OUTPUT);
-
-    digitalWrite(pinCS, HIGH);
+	digitalWrite(pinCS, HIGH);
+	pinMode(pinRST, OUTPUT);
+	digitalWrite(pinRST,HIGH);
+    
 }
 
 
 //set to 24 bit mode
 void MCP3919::reset()
 {
-    reset(OSR_256);
+	digitalWrite(pinRST,LOW);
+	delay(1);
+	digitalWrite(pinRST,HIGH);
+	unsigned long cmd1 = 0x386050;
+	unsigned long cmd2 = 0x000000
+	writeRegister(REG_CONFIG0, cmd1);
+	writeRegister(REG_CONFIG1, cmd2);
 }
 
-//set to resolution specified by OSR
-//OSR_32  11 = 256
-//OSR_64  10 = 128
-//OSR_128 01 = 64 (POR default)
-//OSR_256 00 = 32
-void MCP3919::reset(byte osr)
-{
-	// !TODO!
-	unsigned long cmd1 = 0xfc0fd0;
-	unsigned long cmd2 = 0x000fc0 | osr << 4;
-	byte cmdByte = 	DEVICE_ADDR | REG_CONFIG << 1;
-
-	writeRegister(REG_CONFIG, cmd1);
-	writeRegister(REG_CONFIG, cmd2);
-}
 
 //read from specified register
 //returns 24 bit data
