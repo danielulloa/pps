@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "arduino-kicad-library-1.4")(type "KiCad")(uri "${KIPRJMOD}/arduino-kicad-library-1.4.pretty")(options "")(descr ""))
+)
